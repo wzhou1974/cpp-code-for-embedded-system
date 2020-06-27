@@ -1,0 +1,58 @@
+# The config file hasn't make cmake build successfully
+# need further investigation
+
+cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
+project (socketwrapper LANGUAGES CXX)
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_EXTENSIONS OFF)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_SYSTEM_PROCESSOR aarch64)
+set(CMAKE_ANDROID_API 21)
+set(CMAKE_SYSTEM_VERSION 21)
+set(ANDROID_NATIVE_API_LEVEL 21)
+
+
+set(BOOST_DIR /home/walter/workspace/work/fota/android/Boost-for-Android/build/out/arm64-v8a/include/boost-1_73)
+set(EXTRA_LIB_DIR /home/walter/workspace/work/fota/cgw/sdk_20190919)
+
+include_directories(
+	${BOOST_DIR}/include
+	${EXTRA_LIB_DIR}/include
+	"${CMAKE_CURRENT_SOURCE_DIR}"
+	"${CMAKE_CURRENT_SOURCE_DIR}/3rdparty"
+	"${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/PPK_ASSERT/src"
+	"${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/spdlog/include"
+	"${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/fmt/include"
+	"${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/cxx-prettyprint"
+	"${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/rest_rpc/third/msgpack/include"
+	"${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/rest_rpc/include"
+)
+
+link_directories(
+	${BOOST_DIR}/lib
+	${EXTRA_LIB_DIR}/lib/openssl
+)
+
+MESSAGE("Build type: " ${CMAKE_BUILD_TYPE})
+
+# lots of warnings and all warnings as errors
+#add_compile_options(-Wall -Wextra -pedantic -Werror)
+
+set (CMAKE_CXX_FLAGS_DEBUG "-O0 -g -Werror=maybe-uninitialized -DENABLE_UNIT_TEST")
+set (CMAKE_CXX_FLAGS_RELEASE "-O3 -Werror=maybe-uninitialized -DBOOST_DISABLE_ASSERT -DNDEBUG")
+
+if (CMAKE_BUILD_TYPE MATCHES "Release")
+	set (CMAKE_INSTALL_PREFIX ${CMAKE_CURRENT_SOURCE_DIR}/../install/android-release)
+else()
+	set (CMAKE_INSTALL_PREFIX ${CMAKE_CURRENT_SOURCE_DIR}/../install/android-debug)
+endif()
+
+# Threads
+find_package(Threads REQUIRED)
+
+include(CheckCXXCompilerFlag)
+
+add_subdirectory(common)
+add_subdirectory(https-server)
+add_subdirectory(idcm)
+add_subdirectory(test-idcm)

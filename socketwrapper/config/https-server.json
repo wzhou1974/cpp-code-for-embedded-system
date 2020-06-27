@@ -1,0 +1,7 @@
+{
+	"cert-file": "/home/walter/workspace/work/fota/socketwrapper/config/server.crt",
+	"key-file": "/home/walter/workspace/work/fota/socketwrapper/config/server_rsa_private.key",
+	"static-files-dir": "/home/walter/workspace/tmp/fota-img",
+	"upload-files-dir": "upload",
+	"log-file": "/home/walter/workspace/tmp/https-server.log"
+}

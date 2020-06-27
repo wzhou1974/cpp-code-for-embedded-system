@@ -1,0 +1,52 @@
+cmake_minimum_required (VERSION 2.8.12)
+project (socketwrapper)
+
+include_directories(
+	"${CMAKE_CURRENT_SOURCE_DIR}"
+	"${CMAKE_CURRENT_SOURCE_DIR}/3rdparty"
+	"${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/PPK_ASSERT/src"
+	"${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/spdlog/include"
+	"${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/fmt/include"
+	"${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/cxx-prettyprint"
+	"${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/rest_rpc/third/msgpack/include"
+	"${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/rest_rpc/include"
+)
+
+MESSAGE("Build type: " ${CMAKE_BUILD_TYPE})
+
+# lots of warnings and all warnings as errors
+#add_compile_options(-Wall -Wextra -pedantic -Werror)
+
+add_compile_options(-Wnon-virtual-dtor)
+
+set (CMAKE_CXX_FLAGS_DEBUG "-O0 -g -Werror=maybe-uninitialized -DENABLE_UNIT_TEST")
+set (CMAKE_CXX_FLAGS_RELEASE "-O3 -Werror=maybe-uninitialized -DBOOST_DISABLE_ASSERT -DNDEBUG")
+
+if (CMAKE_BUILD_TYPE MATCHES "Release")
+	set (CMAKE_INSTALL_PREFIX ${CMAKE_CURRENT_SOURCE_DIR}/../install/pc-release)
+else()
+	set (CMAKE_INSTALL_PREFIX ${CMAKE_CURRENT_SOURCE_DIR}/../install/pc-debug)
+	#	add_definitions(-DMY_DEBUG)
+endif()
+
+add_definitions(-DPC_SIMULATION)
+
+# Threads
+find_package(Threads REQUIRED)
+
+link_directories(
+#    "/home/walter/work/study/boost-1.71/install/lib"
+)
+
+find_library(SSL_LIB NAMES ssl /usr/lib/x86_64-linux-gnu/)
+
+add_subdirectory(common)
+add_subdirectory(updaterwrapper)
+add_subdirectory(idcm)
+add_subdirectory(cgw)
+add_subdirectory(https-server)
+add_subdirectory(test-idcm)
+add_subdirectory(fake-selfinstaller)
+add_subdirectory(orchestrator-simulator)
+
+

@@ -1,0 +1,86 @@
+{
+    "fotaProtocolVersion":"HHFOTA-0.1",
+    "fotaCertUrl":"root ota cert download url",
+    "manifest":{
+        "servicePack":{
+            "englishName":"service pack name",
+            "chineseName":"service pack name"
+        },
+        "featurePack":{
+            "activationCode":"",
+            "featurePack_id":""
+        },
+        "campaign":"campaign id",
+        "expiration":"YYYYMMDD HHMMSS",
+        "releaseNotes":[
+            {
+                "locale":"en",
+                "text":"English text"
+            },
+            {
+                "locale":"zh",
+                "text":"中文"
+            }
+        ],
+        "keyword":"",
+        "orchestration":{
+            "vehicleCondition":{
+
+            },
+            "preprocessing":{
+
+            },
+            "postprocessing":{
+
+            }
+        },
+        "packages":[
+            {
+                "ecu":"VDCM",
+                "deviceType":"eth/can/can-fd",
+                "softwareId":"id of software to upgrade",
+                "softwareName":"english name of software to upgrade",
+                "softwareChineseName":"chinese name of software to upgrade",
+                "softwareVersion":"version id",
+                "isHighVoltage":true,
+                "isDoorControl":true,
+                "previousVersion":"previous version id",
+                "estimateUpgradeTime":50,
+                "resources":{
+                    "fullLicense":"",
+                    "fullCertificateUrl":"",
+                    "fullDownloadChecksum":"",
+                    "fullDownloadUrl":"",
+                    "deltaLicense":"LICENSE",
+                    "deltaCertificateUrl":"certificate url",
+                    "deltaChecksum":"b6d81b360a5672d80c27430f39153e2c",
+                    "deltaDownloadUrl":"http://hhfotatest.bosch-mobility-solutions.cn/cdn/fota/v1/package/download/1M.img"
+                }
+            },
+			{
+                "ecu":"TBOX",
+                "deviceType":"eth/can/can-fd",
+                "softwareId":"id of software to upgrade",
+                "softwareName":"english name of software to upgrade",
+                "softwareChineseName":"chinese name of software to upgrade",
+                "softwareVersion":"version id",
+                "isHighVoltage":true,
+                "isDoorControl":true,
+                "previousVersion":"previous version id",
+                "estimateUpgradeTime":50,
+                "resources":{
+                    "fullLicense":"license code",
+                    "fullCertificateUrl":"certificate url",
+                    "fullDownloadChecksum":"25e317773f308e446cc84c503a6d1f85",
+                    "fullDownloadUrl":"http://hhfotatest.bosch-mobility-solutions.cn/cdn/fota/v1/package/download/50M.img",
+                    "deltaLicense":"",
+                    "deltaCertificateUrl":"",
+                    "deltaChecksum":"",
+                    "deltaDownloadUrl":""
+                }
+			}
+        ]
+    }
+}
+
+

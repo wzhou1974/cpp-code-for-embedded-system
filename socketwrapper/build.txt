@@ -1,0 +1,28 @@
+cd build
+rm -rf *
+cp ../socketwrapper/CMakeLists.txt.PC ../socketwrapper/CMakeLists.txt 
+cmake -DCMAKE_BUILD_TYPE=Debug ../socketwrapper
+make
+make install
+
+rm -rf *
+cmake -DCMAKE_BUILD_TYPE=Release ../socketwrapper
+make
+make install
+
+rm -rf *
+cp ../socketwrapper/CMakeLists.txt.CGW ../socketwrapper/CMakeLists.txt
+cmake -DCMAKE_TOOLCHAIN_FILE=toolchain.cmake -DCMAKE_BUILD_TYPE=Release ../socketwrapper
+make
+make install
+
+rm -rf *
+cmake -DCMAKE_TOOLCHAIN_FILE=toolchain.cmake -DCMAKE_BUILD_TYPE=Debug ../socketwrapper
+make
+make install
+
+cd ../socketwrapper
+export NDK_PROJECT_PATH=.
+$NDK_ROOT/ndk-build NDK_APPLICATION_MK=./Application-release.mk
+$NDK_ROOT/ndk-build NDK_APPLICATION_MK=./Application-debug.mk
+

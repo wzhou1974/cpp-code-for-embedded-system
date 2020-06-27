@@ -1,0 +1,50 @@
+{   
+    "https-server-ip": "127.0.0.1",
+    "node": "TBOX",
+    "manifest": [{
+        "software_id": "SV-1",
+        "filename": "pkg-1",
+        "version": "ver.1",
+        "delta": false,
+        "original_version": "1.0",
+        "type": 1,
+        "flashing": 0,
+        "attrs": [{
+            "attr0": "a0"
+        }, {
+            "attr1": "a1"
+        }, {
+            "attr2": "a2"
+        }]
+    }, {
+        "software_id": "SV-2",
+        "filename": "pkg-2",
+        "version": "ver.2",
+        "delta": false,
+        "original_version": "1.1",
+        "type": 1,
+        "flashing": 0,
+        "attrs": [{
+            "attr0": "a0"
+        }, {
+            "attr1": "a1"
+        }, {
+            "attr2": "a2"
+        }]
+    }],
+    "operation": [	
+        {
+            "task": "PrepareUpgrade"
+        },
+        {
+            "task": "Upgrade"
+        },
+        {
+            "task": "GetState"
+        },
+        {
+            "task": "Finalize"
+        }
+    ]
+}
+
